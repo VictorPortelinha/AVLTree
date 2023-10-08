@@ -1,7 +1,7 @@
 public class AVLTree {
 
     Node root;
-    public BinaryTree(){
+    public AVLTree(){
         root = null;
     }
     public void delete(int data){
