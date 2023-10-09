@@ -11,6 +11,7 @@ public class BinaryTree {
             return null;
         }
         if(node.getData() == data){
+            System.out.println("O número "+data+" foi removido");
             if(node.getEsquerda() == null){
                 return node.getDireita();
             }else if(node.getDireita()== null){
@@ -19,14 +20,32 @@ public class BinaryTree {
             node.setData(getMax(node.getEsquerda()));
             node.setEsquerda(delete(node.getData(),node.getEsquerda()));
         }
-        else if(node.getData()<0){
+        else if(data <= node.getData()){
             node.setEsquerda(delete(data,node.getEsquerda()));
-        }else if(node.getData()>0){
+        }else if(data >= node.getData()){
             node.setDireita(delete(data,node.getDireita()));
         }
 
         return node;
     }
+    public void search(int data){
+        root = search(data,root);
+    }
+    public Node search(int data,Node node){
+        if(node == null){
+            return null;
+        }
+        if(node.getData() == data){
+            System.out.println("O número "+data+" foi encontrado");
+        }else if(data <= node.getData()){
+            node.setEsquerda(search(data,node.getEsquerda()));
+        }else if(data >= node.getData()){
+            node.setDireita(search(data,node.getDireita()));
+        }
+
+        return node;
+    }
+
     public void insert(int data){
         root = insert(data,root);
     }
@@ -34,10 +53,10 @@ public class BinaryTree {
         if(node == null){
             return new Node(data); // se a raiz estiver vazia
         }
-        // Percorre o a esquerda ou a direita comparando seu valor com 0
-        if(node.getData()<0){
+        // Percorre o a esquerda ou a direita comparando seu valor com o nó anterior
+        if(data <= node.getData()){
             node.setEsquerda(insert(data,node.getEsquerda()));
-        }else if(node.getData()>0){
+        }else if(data >= node.getData()){
             node.setDireita(insert(data,node.getDireita()));
         }
         return node;
